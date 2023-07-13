@@ -1,238 +1,213 @@
-function countdown() {
-    var seconds = 60;
-    function tick(){
-        var counter = document.getElementById("counter");
-        seconds--;
-        counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
-        if (seconds > 0 ) {
-            setTimeout (tick, 1000);
-        } else {
-            clearInterval(tick)
-    }
-}
-    tick();
-}
-countdown();
-
-
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit');
-
-submitButton.addEventListener("click", function(){
-	showResults(myQuestions, quizContainer, resultsContainer);
-})
 
 
 
-//generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
 
-function showQuestions(questions, thisQuizContainer){
-    thisQuizContainer = quizContainer
-	questions = myQuestions
-	var output = [];
-	var answers;
-
-	
-	for(var i=0; i<questions.length; i++){
-		
-		
-		answers = [];
-
-		
-		for(letter in questions[i].answers){
-
-			
-			answers.push(
-				'<label>'
-					+ '<input id="answer'+letter+'" type="radio" name="question'+i+'" value="'+letter+'">'
-					+ letter + ': '
-					+ questions[i].answers[letter]
-				+ '</label>'
-			);
-		}
-
-		
-		output.push(
-            '<button class="submit-answer">submit</button>' +
-			'<div class="question">' + questions[i].question + '</div>'
-			+ '<div class="answers">' + answers.join('') + '</div>' 
-
-		);
-
-	}
-	quizContainer.innerHTML = output.join('');
-    document.querySelector(".submit-answer").addEventListener("click", function(){
-        console.log(this.value)
-
-    })
-}
-
-var myQuestions = [
-	{
-		question: "Inside which HTML element do we put the Java Script?",
-		answers: {
-			a: '<java script>',
-			b: '<js>',
-			c: '<scripting>',
-            d: '<script>'
-		},
-		correctAnswer: 'd'
-	},
-	{
-		question: "How do you write Hello Word in an alert box?",
-		answers: {
-			a: 'alert("Hello World")',
-			b: 'msg("Hello World")',
-			c: 'alertBox("Hello World")',
-            d: 'msgBox("Hello World")'
-		},
-		correctAnswer: 'a'
-	},
+const Questions = [
     {
-
-        question: "How do you create a function in JavaScript?",
-        answers: {
-            a: 'function = myFunction()',
-            b: 'function myFunction()',
-            c: 'function:myFunction()',
-            d: 'function = myFunction[]'
-        },
-        correctAnswer: 'b'
-
+        q: "Inside which HTML element do we put the Java Script?",
+        a: [{ text: '<java script>', isCorrect: false },
+        { text: '<js>', isCorrect: false },
+        { text: '<scripting>', isCorrect: false },
+        { text: '<script>', isCorrect: true }
+        ]
     },
+
     {
-        question: "How to write an IF statement in JavaScript?",
-        answers: {
-            a: 'if i == 5 then',
-            b: 'if (i == 5)',
-            c: 'if i = 5',
-            d: 'if i = 5 then'
-        },
-        correctAnswer: 'b'
+        q: "How do you write Hello Word in an alert box?",
+        a: [{ text: 'alert("Hello World")', isCorrect: true },
+        { text: 'msg("Hello World")', isCorrect: false },
+        { text: 'alertBox("Hello World")', isCorrect: false },
+        { text: 'msgBox("Hello World")', isCorrect: false }
+        ]
     },
+
     {
-        question: "How to write an IF statement for executing some code if i is NOT equal to 5?",
-        answers: {
-            a: 'if (i != 5)',
-            b: 'if i <> 5',
-            c: 'if (i <> 5)',
-            d: 'if i =! 5 then'
-        },
-        correctAnswer: 'a'
+
+        q: "How do you create a function in JavaScript?",
+        a: [{ text: 'function = myFunction()', isCorrect: false },
+        { text: 'function myFunction()', isCorrect: true },
+        { text: 'function:myFunction()', isCorrect: false },
+        { text: 'function = myFunction[]', isCorrect: false }
+        ]
     },
+
     {
-        question: "How does a FOR loop start?",
-        answers: {
-            a: 'for (i <= 5; i++)',
-            b: 'for i = 1 to 5',
-            c: 'for (i = 0; i <= 5; i++)',
-            d: 'for (i = 0; i <= 5)'
-        },
-        correctAnswer: 'c'
+        q: "How to write an IF statement in JavaScript?",
+        a: [{ text: 'if i == 5 then', isCorrect: false },
+        { text: 'if (i == 5)', isCorrect: true },
+        { text: 'if i = 5', isCorrect: false },
+        { text: 'if i = 5 then', isCorrect: false }
+        ]
     },
+
+
     {
-        question: "What is the correct way to write a JavaScript array?",
-        answers: {
-            a: 'var colors = (1:"red", 2:"green", 3:"blue")',
-            b: 'var colors = 1 = ("red"), 2 = ("green"), 3 = ("blue")',
-            c: 'var colors = "red", "green", "blue"',
-            d: 'var colors = ["red", "green", "blue"]'
-        },
-        correctAnswer: 'd'
+        q: "How does a FOR loop start?",
+        a: [{ text: 'for (i <= 5; i++)', isCorrect: false },
+        { text: 'for i = 1 to 5', isCorrect: false },
+        { text: 'for (i = 0; i <= 5; i++)', isCorrect: true },
+        { text: 'for (i = 0; i <= 5)', isCorrect: false }
+        ]
     },
+
     {
-        question: "Which operator is used to assign a value to a variable?",
-        answers: {
-            a: 'X',
-            b: '-',
-            c: '=',
-            d: '&'
-        },
-        correctAnswer: 'c'
+        q: "What is the correct way to write a JavaScript array?",
+        a: [{ text: 'var colors = (1:"red", 2:"green", 3:"blue")', isCorrect: false },
+        { text: 'var colors = 1 = ("red"), 2 = ("green"), 3 = ("blue")', isCorrect: false },
+        { text: 'var colors = "red", "green", "blue"', isCorrect: false },
+        { text: 'var colors = ["red", "green", "blue"]', isCorrect: true }
+        ]
     },
+
     {
-        question: "How can you add a comment in a JavaScript?",
-        answers: {
-            a: '<!--This is a comment-->',
-            b: '"This is a comment"',
-            c: '*This is a comment*',
-            d: '//This is a comment'
-        },
-        correctAnswer: 'd'
+        q: "Which operator is used to assign a value to a variable?",
+        a: [{ text: 'X', isCorrect: false },
+        { text: '-', isCorrect: false },
+        { text: '=', isCorrect: true },
+        { text: '&', isCorrect: false }
+        ]
     },
+
     {
-        question: "How do you declare a JavaScript variable?",
-        answers: {
-            a: 'var studentName;',
-            b: 'v studentName;',
-            c: 'variable studentName;',
-            d: 'var <studentName>;'
-        },
-        correctAnswer: 'a'
+        q: "How can you add a comment in a JavaScript?",
+        a: [{ text: '<!--This is a comment-->', isCorrect: false },
+        { text: '"This is a comment"', isCorrect: false },
+        { text: '*This is a comment*', isCorrect: false },
+        { text: '//This is a comment', isCorrect: true }
+        ]
     },
+
     {
-        question: "What will the following code return: Boolean(10 > 9)",
-        answers: {
-            a: 'NaN',
-            b: 'false',
-            c: 'true',
-            d: 'Undefined'
-        },
-        correctAnswer: 'c'
+        q: "How do you declare a JavaScript variable?",
+        a: [{ text: 'var studentName;', isCorrect: true },
+        { text: 'v studentName;', isCorrect: false },
+        { text: 'variable studentName;', isCorrect: false },
+        { text: 'var <studentName>;', isCorrect: false }
+        ]
     },
+
     {
-        question: "How do you round the number 7.25, to the nearest integer?",
-        answers: {
-            a: 'round(7.25)',
-            b: 'Math.round(7.25)',
-            c: 'rnd(7.25)',
-            d: 'Math.rnd(7.25)'
-        },
-        correctAnswer: 'b'
-    }
+        q: "What will the following code return: Boolean(10 > 9)",
+        a: [{ text: 'NaN', isCorrect: false },
+        { text: 'false', isCorrect: false },
+        { text: 'true', isCorrect: true },
+        { text: 'Undefined', isCorrect: false }
+        ]
+    },
+
+    {
+        q: "How do you round the number 7.25, to the nearest integer?",
+        a: [{ text: 'round(7.25)', isCorrect: false },
+        { text: 'Math.round(7.25)', isCorrect: true },
+        { text: 'rnd(7.25)', isCorrect: false },
+        { text: 'Math.rnd(7.25)', isCorrect: false }
+        ]
+    },
+
 
 ];
 
+let currQuestion = 0
+let score = 0
+let tick 
+let seconds
 
+function countdown() {
+     seconds = 60;
+    tick = function () {
+        var counter = document.getElementById("counter");
+        seconds--;
+        
+        if (seconds > 0) {
+           
+            setTimeout(tick, 1000);
+        } else {
+            seconds = 0
+            clearInterval(tick)
+            document.getElementById("opt").remove()
+        document.getElementById("ques").remove()
+        document.getElementById("btn").remove()
+            loadScore()
+        }
+        counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds); 
+    }
+    tick();
+}
 
+function loadQues() {
+    const question = document.getElementById("ques")
+    const opt = document.getElementById("opt")
 
-// showQuestions(myQuestions, quizContainer);
+    question.textContent = Questions[currQuestion].q;
+    opt.innerHTML = ""
 
-function showResults(questions, quizContainer, resultsContainer){
-	
-	
-	var answerContainers = quizContainer.querySelectorAll('.answers');
-	
-	
-	var userAnswer = '';
-	var numCorrect = 0;
-	
-	
-	for(var i=0; i<questions.length; i++){
+    for (let i = 0; i < Questions[currQuestion].a.length; i++) {
+        const choicesdiv = document.createElement("div");
+        const choice = document.createElement("input");
+        const choiceLabel = document.createElement("label");
 
-		
-		// userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-		
-		
-		if(userAnswer===questions[i].correctAnswer){
-			
-			numCorrect++;
-			
-			
-			answerContainers[i].style.color = 'lightgreen';
-		}
-		
-		else{
-			
-			// answerContainers[i].style.color = 'red';
-		}
-	}
+        choice.type = "radio";
+        choice.name = "answer";
+        choice.value = i;
 
-	
-	resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+        choiceLabel.textContent = Questions[currQuestion].a[i].text;
+
+        choicesdiv.appendChild(choice);
+        choicesdiv.appendChild(choiceLabel);
+        opt.appendChild(choicesdiv);
+    }
+}
+
+loadQues();
+
+function loadScore() {
+    
+    const totalScore = document.getElementById("score")
+    //TODO : use local storage to store total score
+    totalScore.textContent = `You scored ${score} out of ${Questions.length}`
+    let btn = document.createElement("button")
+    btn.textContent = 'restart quiz'
+    btn.addEventListener("click",function (){
+        window.location.reload()
+    })
+    document.getElementById("panel").appendChild(btn)
 }
 
 
+function nextQuestion() {
+    if (currQuestion < Questions.length - 1) {
+        currQuestion++;
+        loadQues();
+    } else {
+        document.getElementById("opt").remove()
+        document.getElementById("ques").remove()
+        document.getElementById("btn").remove()
+        loadScore();
+    }
+}
 
-submitButton.addEventListener("click", showQuestions)
+function checkAns() {
+    const selectedAns = parseInt(document.querySelector('input[name="answer"]:checked').value);
+
+    if (Questions[currQuestion].a[selectedAns].isCorrect) {
+        score++;
+        console.log("Correct")
+        nextQuestion();
+    } else {
+        seconds = seconds - 10
+        nextQuestion();
+    }
+}
+
+document.getElementById("panel").style = "display:none;"
+
+document.getElementById("submit").addEventListener("click", function (event) {
+
+    countdown()
+    document.getElementById("panel").style = "display:block;"
+    event.target.style = "display:none;"
+
+})
+
+
+//local storage

@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <title>JS Fun Quiz</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <title>JS Fun Quiz</title>
 </head>
 
 <body>
-   <header>
+  <header>
     <ul>
-    <div class="align-left">
-    
+      <div class="align-left">
+
         <a href="#View Highscores">View Highscores</a>
-   </div>
-    <div class="align-right">
-   <div class="btnGroup">
-  <span class="Btn" id="verifiBtn">
+      </div>
+      <div class="align-right">
+        <div class="btnGroup">
+          <span class="Btn" id="verifiBtn">
 
-    <button type="reset">Time:</button>
-  </span>
-  <span class="timer">
-    <span id="counter"></span>
-  </span></div>
-</div> </ul> </header>
+            <button type="reset">Time:</button>
+          </span>
+          <span class="timer">
+            <span id="counter"></span>
+          </span>
+        </div>
+      </div>
+    </ul>
+  </header>
 
-<h1>Coding Quiz Challenge</h1>
+  <h1>Coding Quiz Challenge</h1>
 
-<section>
+  <section>
     <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+
+      <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers
+        will penalize your score time by ten seconds! </p>
+    </div>
+  </section>
+  <div class="start" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+    <button id="submit">Start Quiz</button>
+  </div>
+  <div class="start" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+  <div id="panel" class="panel">
     
-        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score time by ten seconds! </p>
-</div>
-</section>
-<div class="start" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+    
+    <div class="question" id="ques"></div>
+    <div class="options" id="opt"></div>
+    <button onclick="checkAns()" id="btn">Submit</button>
+    <div id="score"></div>
+
     
 
-<div id="quiz"></div>
-<button id="submit">Start Quiz</button>
-<div id="results"></div>
-
-</div>
+  </div> 
 
 
-    <script src="assets/script.js"> </script>
+  <script src="assets/script.js"> </script>
 </body>
+
 </html>
