@@ -113,8 +113,8 @@ let tick
 let seconds
 
 function countdown() {
-     seconds = 60;
-    tick = function () {
+        seconds = 60;
+        tick = function () {
         var counter = document.getElementById("counter");
         seconds--;
         
@@ -125,8 +125,8 @@ function countdown() {
             seconds = 0
             clearInterval(tick)
             document.getElementById("opt").remove()
-        document.getElementById("ques").remove()
-        document.getElementById("btn").remove()
+            document.getElementById("ques").remove()
+            document.getElementById("btn").remove()
             loadScore()
         }
         counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds); 

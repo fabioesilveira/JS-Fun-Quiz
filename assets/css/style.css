@@ -30,11 +30,11 @@ h1{
 p { 
     text-align: center;
     margin: auto;
-font-family: "consolas", "sans-serif";
-color: black;
-font-size: 20px;
-padding-top: 20px;
-width: 35%
+    font-family: "consolas", "sans-serif";
+    color: black;
+    font-size: 20px;
+    padding-top: 20px;
+    width: 35%
 }
 
 .panel {
@@ -66,8 +66,7 @@ width: 35%
 }
  
 
- 
-#score {
+ #score {
     font-size: 30px;
     color: black;
     background-color: white;
@@ -85,7 +84,7 @@ width: 35%
 }
 
 #btn{
-   margin-left: 40%;
+    margin-left: 40%;
 }
 
 #score{
